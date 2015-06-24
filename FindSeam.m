@@ -35,8 +35,8 @@ Gimg=abs(Gimg);
 		end
 	end
 for h=1:num
-	minval=min(test2(rmax,1:cmax));
-	locations=find(test2(rmax,1:cmax)==minval);
+	minval=min(test2(rmax,:));
+	locations=find(test2(rmax,:)==minval);
 	[x,y]=size(locations);
 	%back traking to find the seam
 		for loc=1:y
@@ -118,6 +118,5 @@ for h=1:num
 			%end
 		end
 	end
-	cmax=cmax-1;
 end
 %imshow(I);
