@@ -6,7 +6,8 @@ function insertSeam(img, num)
 	% find num seams
 	for i=1:num
 		%delete seams
-		tmp = FindSeam(img2);
+		Gimg = getEnergy(img2);
+		tmp = FindSeam(img2, Gimg);
 		img2 = DeleteSeam(tmp, img2);
 		
 		% align vector

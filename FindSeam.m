@@ -1,16 +1,11 @@
-function [vector] = FindSeam(I)
+function [vector] = FindSeam(I, Gimg)
  
 %   Detailed explanation goes here
 %calculating image gradient as an energy image
 [rmax, cmax, tmp] = size(I);
 ImgOut = I;
-img = double(I)/255;
-img = rgb2gray(img);
-vector = zeros(rmax, 1);
-[Ix,Iy]=gradient(img);
-Gimg=Ix+Iy;
-Gimg=abs(Gimg);
 
+vector = zeros(rmax, 1);
 	%calculating sum of pixels value in each column
 	test2=zeros(rmax,cmax);
 	for row = 1 :rmax
