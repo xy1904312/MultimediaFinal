@@ -33,7 +33,9 @@ function insertSeam(img, num)
 		for row=1:rmax
 			
 			[col, index] = max(vec(row, :));
-			img(row, col+2:cmax+1,:) = img(row, col+1:cmax,:);
+			if col<cmax
+				img(row, col+2:cmax+1,:) = img(row, col+1:cmax,:);
+			end
 			if col>1 && col < cmax
 				img(row, col+1,1) = sum([img(row, col-1,1), img(row, col,1), img(row, col+1,1)]) / 3;
 				img(row, col+1,2) = sum([img(row, col-1,2), img(row, col,2), img(row, col+1,2)]) / 3;
