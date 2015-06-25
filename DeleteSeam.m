@@ -1,5 +1,4 @@
 function img = DeleteSeam(vector, I)
-
 	[rmax, cmax, tmp] = size(I);
 	[rmax, num] = size(vector);
 	for h=1:num

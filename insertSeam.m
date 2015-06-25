@@ -1,26 +1,49 @@
-function insertSeam(img, num)
+function insertSeam(img, num, obj, Gimg)
 	img2 = img;
 	[rmax, cmax, t] = size(img);
 	vec = zeros(rmax, num);
 	add = zeros(rmax, num);
 	% find num seams
-	for i=1:num
-		%delete seams
-		Gimg = getEnergy(img2);
-		tmp = FindSeam(img2, Gimg);
-		img2 = DeleteSeam(tmp, img2);
+	if not(obj)
+		for i=1:num
+			%delete seams
+			Gimg = getEnergy(img2);
+			tmp = FindSeam(img2, Gimg);
+			img2 = DeleteSeam(tmp, img2);
+			
+			% align vector
 		
-		% align vector
-		
-		vec(:,i) = tmp;
-		for y=1:rmax
-			c = 0;
-			for x=1:i-1
-				if vec(y,x)<=vec(y,i)
-					c = c+1;
+			vec(:,i) = tmp;
+			for y=1:rmax
+				c = 0;
+				for x=1:i-1
+					if vec(y,x)<=vec(y,i)
+						c = c+1;
+					end
 				end
+				add(y,i) = c;
 			end
-			add(y,i) = c;
+		end
+	else
+		
+		for i=1:num
+			%delete seams
+			tmp = FindSeam(img2, Gimg);
+			img2 = DeleteSeam(tmp, img2);
+			Gimg = DeleteSeam(tmp, Gimg);
+			
+			% align vector
+		
+			vec(:,i) = tmp;
+			for y=1:rmax
+				c = 0;
+				for x=1:i-1
+					if vec(y,x)<=vec(y,i)
+						c = c+1;
+					end
+				end
+				add(y,i) = c;
+			end
 		end
 	end
 	for i=1:num
