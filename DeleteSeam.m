@@ -1,4 +1,4 @@
-function DeleteSeam(vector, I)
+function img = DeleteSeam(vector, I)
 
 	[rmax, cmax, tmp] = size(I);
 	[rmax, num] = size(vector);
@@ -11,5 +11,5 @@ function DeleteSeam(vector, I)
 		I(:, cmax, :) = [];
 		cmax = cmax-1;
 	end
-	
-imwrite(I, 'c.png');
+	img = I;
+end

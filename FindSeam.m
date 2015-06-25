@@ -43,74 +43,90 @@ for h=1:num
 		j = locations(1,loc);
 		for row=rmax:-1:2
 			if row==rmax
-			%    ImgOut(row,j,1)=255;
-			%    ImgOut(row,j,2)=0;
-			%    ImgOut(row,j,3)=0;
+			    ImgOut(row,j,1)=255;
+			    ImgOut(row,j,2)=0;
+			    ImgOut(row,j,3)=0;
 				test2(row,j) = realmax;
 				vector(row, h) = j;
 			end
 			%if row < rmax
 				if j==1
-					tmp=[test2(row-1,j),test2(row-1,j+1)];
+					j2 = j+1;
+					while test2(row-1,j+1)==realmax && j2<cmax
+						j2=j2+1;
+					end
+					tmp=[test2(row-1,j),test2(row-1,j2)];
 					[C,index]=min(tmp);
 					if index==1
-			%            ImgOut(row-1,j,1)=255;
-			%            ImgOut(row-1,j,2)=0;
-			%            ImgOut(row-1,j,3)=0;
+			            ImgOut(row-1,j,1)=255;
+			            ImgOut(row-1,j,2)=0;
+			            ImgOut(row-1,j,3)=0;
 						test2(row-1,j) = realmax;
 						vector(row-1, h) = j;
 					end
 					if index==2
-			%            ImgOut(row-1,j+1,1)=255;
-			%            ImgOut(row-1,j+1,2)=0;
-			%            ImgOut(row-1,j+1,3)=0;
-						j=j+1;
+			            ImgOut(row-1,j+1,1)=255;
+			            ImgOut(row-1,j+1,2)=0;
+			            ImgOut(row-1,j+1,3)=0;
+						j=j2;
 						vector(row-1, h) = j;
 						test2(row-1,j) = realmax;
 					end
 				end
 				if j>1 && j<cmax
-					tmp1=[test2(row-1,j),test2(row-1,j+1),test2(row-1,j-1)];
+					j1 = j-1;
+					j2 = j+1;
+					while test2(row-1,j1) == realmax && j1>1
+						j1 = j1-1;
+					end
+					while test2(row-1,j+1)==realmax && j2<cmax
+						j2=j2+1;
+					end
+					tmp1=[test2(row-1,j),test2(row-1,j2),test2(row-1,j1)];
 					[C,index]=min(tmp1);
 					if index==1
-			%            ImgOut(row-1,j,1)=255;
-			%            ImgOut(row-1,j,2)=0;
-			%            ImgOut(row-1,j,3)=0;
+			            ImgOut(row-1,j,1)=255;
+			            ImgOut(row-1,j,2)=0;
+			            ImgOut(row-1,j,3)=0;
 						test2(row-1,j) = realmax;
 						vector(row-1, h) = j;
 					end
 					if index==2
-			%            ImgOut(row-1,j+1,1)=255;
-			%            ImgOut(row-1,j+1,2)=0;
-			%            ImgOut(row-1,j+1,3)=0;
-						j=j+1;
+			            ImgOut(row-1,j+1,1)=255;
+			            ImgOut(row-1,j+1,2)=0;
+			            ImgOut(row-1,j+1,3)=0;
+						j=j2;
 						vector(row-1, h) = j;
 						test2(row-1,j) = realmax;
 					end
 					if index==3
-			%            ImgOut(row-1,j-1,1)=255;
-			%            ImgOut(row-1,j-1,2)=0;
-			%            ImgOut(row-1,j-1,3)=0;
-						j=j-1;
+			            ImgOut(row-1,j-1,1)=255;
+			            ImgOut(row-1,j-1,2)=0;
+			            ImgOut(row-1,j-1,3)=0;
+						j=j1;
 						vector(row-1, h) = j;
 						test2(row-1,j) = realmax;
 					end
 				end
 				if j == cmax
-					tmp2=[test2(row-1,j),test2(row-1,j-1)];
+					j1 = j-1;
+					while test2(row-1,j1) == realmax && j1>1
+						j1 = j1-1;
+					end
+					tmp2=[test2(row-1,j),test2(row-1,j1)];
 					[C,index]=min(tmp2);
 					if index==1
-			%            ImgOut(row-1,j,1)=255;
-			%            ImgOut(row-1,j,2)=0;
-			%            ImgOut(row-1,j,3)=0;
+			            ImgOut(row-1,j,1)=255;
+			            ImgOut(row-1,j,2)=0;
+			            ImgOut(row-1,j,3)=0;
 						vector(row-1, h) = j;
 						test2(row-1,j) = realmax;
 					end
 					if index==2
-			%            ImgOut(row-1,j-1,1)=255;
-			%            ImgOut(row-1,j-1,2)=0;
-			%            ImgOut(row-1,j-1,3)=0;
-						j=j-1;
+			            ImgOut(row-1,j-1,1)=255;
+			            ImgOut(row-1,j-1,2)=0;
+			            ImgOut(row-1,j-1,3)=0;
+						j=j1;
 						vector(row-1, h) = j;
 						test2(row-1,j) = realmax;
 					end
@@ -119,4 +135,7 @@ for h=1:num
 		end
 	end
 end
+%imshow(ImgOut);
 %imshow(I);
+%imwrite(ImgOut, 'b.png');
+end
