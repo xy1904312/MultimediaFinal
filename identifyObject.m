@@ -1,4 +1,9 @@
 function Gimg = identifyObject(img, max)
+	%let user identify object
+	%the energy will be set to max if max is true
+	% otherwise it will be min 
+	%return energe map
+	
 	%initial energy
 	Gimg = getEnergy(img);
 	

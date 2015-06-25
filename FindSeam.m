@@ -1,7 +1,8 @@
 function [vector] = FindSeam(I, Gimg)
- 
-%   Detailed explanation goes here
-%calculating image gradient as an energy image
+	%Find a seam in img I
+	%where the energy is sepcified by Gimg
+
+	%calculating image gradient as an energy image
 [rmax, cmax, tmp] = size(I);
 ImgOut = I;
 

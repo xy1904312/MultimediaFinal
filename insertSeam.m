@@ -1,4 +1,9 @@
 function insertSeam(img, num, obj, Gimg)
+	%insert num of seams to img
+	%if obj is true
+	% the energymap will be Gimg
+	% otherwise calculate the energy map
+	
 	img2 = img;
 	[rmax, cmax, t] = size(img);
 	vec = zeros(rmax, num);
