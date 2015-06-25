@@ -1,4 +1,4 @@
-function Gimg = identifyObject(img)
+function Gimg = identifyObject(img, max)
 	%initial energy
 	Gimg = getEnergy(img);
 	
@@ -24,7 +24,10 @@ function Gimg = identifyObject(img)
 			xCoord = imgXYList(pixI,1);
 			yCoord = imgXYList(pixI,2);
 			%set energy here
-			Gimg(xCoord, yCoord) = realmax;
+			if max
+				Gimg(xCoord, yCoord) = realmax;
+			else
+				Gimg(xCoord, yCoord) = realmin;
 		end
 	end
 end
