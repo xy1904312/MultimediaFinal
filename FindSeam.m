@@ -1,4 +1,4 @@
-function [vector] = FindSeam(I, num)
+function [vector] = FindSeam(I)
  
 %   Detailed explanation goes here
 %calculating image gradient as an energy image
@@ -6,7 +6,7 @@ function [vector] = FindSeam(I, num)
 ImgOut = I;
 img = double(I)/255;
 img = rgb2gray(img);
-vector = zeros(rmax, num);
+vector = zeros(rmax, 1);
 [Ix,Iy]=gradient(img);
 Gimg=Ix+Iy;
 Gimg=abs(Gimg);
@@ -34,7 +34,7 @@ Gimg=abs(Gimg);
 			end
 		end
 	end
-for h=1:num
+
 	minval=min(test2(rmax,:));
 	locations=find(test2(rmax,:)==minval);
 	[x,y]=size(locations);
@@ -43,11 +43,11 @@ for h=1:num
 		j = locations(1,loc);
 		for row=rmax:-1:2
 			if row==rmax
-			    ImgOut(row,j,1)=255;
-			    ImgOut(row,j,2)=0;
-			    ImgOut(row,j,3)=0;
+	%		    ImgOut(row,j,1)=255;
+	%		    ImgOut(row,j,2)=0;
+	%		    ImgOut(row,j,3)=0;
 				test2(row,j) = realmax;
-				vector(row, h) = j;
+				vector(row) = j;
 			end
 			%if row < rmax
 				if j==1
@@ -58,18 +58,18 @@ for h=1:num
 					tmp=[test2(row-1,j),test2(row-1,j2)];
 					[C,index]=min(tmp);
 					if index==1
-			            ImgOut(row-1,j,1)=255;
-			            ImgOut(row-1,j,2)=0;
-			            ImgOut(row-1,j,3)=0;
+	%		            ImgOut(row-1,j,1)=255;
+	%		            ImgOut(row-1,j,2)=0;
+	%		            ImgOut(row-1,j,3)=0;
 						test2(row-1,j) = realmax;
-						vector(row-1, h) = j;
+						vector(row-1) = j;
 					end
 					if index==2
-			            ImgOut(row-1,j+1,1)=255;
-			            ImgOut(row-1,j+1,2)=0;
-			            ImgOut(row-1,j+1,3)=0;
+	%		            ImgOut(row-1,j+1,1)=255;
+	%		            ImgOut(row-1,j+1,2)=0;
+	%		            ImgOut(row-1,j+1,3)=0;
 						j=j2;
-						vector(row-1, h) = j;
+						vector(row-1) = j;
 						test2(row-1,j) = realmax;
 					end
 				end
@@ -85,26 +85,26 @@ for h=1:num
 					tmp1=[test2(row-1,j),test2(row-1,j2),test2(row-1,j1)];
 					[C,index]=min(tmp1);
 					if index==1
-			            ImgOut(row-1,j,1)=255;
-			            ImgOut(row-1,j,2)=0;
-			            ImgOut(row-1,j,3)=0;
+	%		            ImgOut(row-1,j,1)=255;
+	%		            ImgOut(row-1,j,2)=0;
+	%		            ImgOut(row-1,j,3)=0;
 						test2(row-1,j) = realmax;
-						vector(row-1, h) = j;
+						vector(row-1) = j;
 					end
 					if index==2
-			            ImgOut(row-1,j+1,1)=255;
-			            ImgOut(row-1,j+1,2)=0;
-			            ImgOut(row-1,j+1,3)=0;
+	%		            ImgOut(row-1,j+1,1)=255;
+	%		            ImgOut(row-1,j+1,2)=0;
+	%		            ImgOut(row-1,j+1,3)=0;
 						j=j2;
-						vector(row-1, h) = j;
+						vector(row-1) = j;
 						test2(row-1,j) = realmax;
 					end
 					if index==3
-			            ImgOut(row-1,j-1,1)=255;
-			            ImgOut(row-1,j-1,2)=0;
-			            ImgOut(row-1,j-1,3)=0;
+	%		            ImgOut(row-1,j-1,1)=255;
+	%		            ImgOut(row-1,j-1,2)=0;
+	%		            ImgOut(row-1,j-1,3)=0;
 						j=j1;
-						vector(row-1, h) = j;
+						vector(row-1) = j;
 						test2(row-1,j) = realmax;
 					end
 				end
@@ -116,25 +116,24 @@ for h=1:num
 					tmp2=[test2(row-1,j),test2(row-1,j1)];
 					[C,index]=min(tmp2);
 					if index==1
-			            ImgOut(row-1,j,1)=255;
-			            ImgOut(row-1,j,2)=0;
-			            ImgOut(row-1,j,3)=0;
-						vector(row-1, h) = j;
+	%		            ImgOut(row-1,j,1)=255;
+	%		            ImgOut(row-1,j,2)=0;
+	%		            ImgOut(row-1,j,3)=0;
+						vector(row-1) = j;
 						test2(row-1,j) = realmax;
 					end
 					if index==2
-			            ImgOut(row-1,j-1,1)=255;
-			            ImgOut(row-1,j-1,2)=0;
-			            ImgOut(row-1,j-1,3)=0;
+	%		            ImgOut(row-1,j-1,1)=255;
+	%		            ImgOut(row-1,j-1,2)=0;
+	%		            ImgOut(row-1,j-1,3)=0;
 						j=j1;
-						vector(row-1, h) = j;
+						vector(row-1) = j;
 						test2(row-1,j) = realmax;
 					end
 				end
 			%end
 		end
 	end
-end
 %imshow(ImgOut);
 %imshow(I);
 %imwrite(ImgOut, 'b.png');
