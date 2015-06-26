@@ -1,4 +1,4 @@
-function Gimg = identifyObject(img, max)
+function [Gimg, M] = identifyObject(img, SetMax)
 	%let user identify object
 	%the energy will be set to max if max is true
 	% otherwise it will be min 
@@ -23,16 +23,18 @@ function Gimg = identifyObject(img, max)
 	
 	isInShape = inpolygon( imgXYList(:,1), imgXYList(:,2), PointList(:,1), PointList(:,2) );
 	
-	
+	M = max(max(Gimg));
+	M = -M;
 	for pixI = 1 : imgPixN
 		if isInShape(pixI)
 			xCoord = imgXYList(pixI,1);
 			yCoord = imgXYList(pixI,2);
 			%set energy here
-			if max
+			if SetMax
 				Gimg(xCoord, yCoord) = realmax;
 			else
-				Gimg(xCoord, yCoord) = realmin;
+				Gimg(xCoord, yCoord) = M;	
+			end
 		end
 	end
 end
